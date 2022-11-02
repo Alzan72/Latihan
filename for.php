@@ -7,21 +7,38 @@
     <title>Document</title>
 </head>
 <body>
-
-<?php
-$input=@$_POST['input'];
-$jumlah=@$_POST['jumlah'];
-?>
-
-    <form action="" method="POST">
+    <form action="" method="post">
     <input type="text" name="input">
     <br>
     <input type="number"name="jumlah"><br>
-   
-
-    <button ><a target="_blank" href="https://web.whatsapp.com/send/?phone=%25+6283153564301&text=Halo sca, saya ingin memesan <?php echo $input; ?> dengan jumlah <?php  echo $jumlah; ?> , apakah tersedia">pesan  </a></button>
+    <button>submit</button>
     <br>    
     </form>
+
+    <?php
+$input=@$_REQUEST['input'];
+$jumlah=@$_REQUEST['jumlah'];
+
+if ($input) {
+     echo "selamat datang $input <br>";
+
+}
+if ($jumlah) {
+    echo "anda membeli dengan jumlah $jumlah <br>"; 
+}
+?>
+
+
+
+    <a href="">reset</a>
+
+    <script>
+        let notice="data tersimpan silahkan";
+    </script>
+
+  
+    
+    
     
 
    
