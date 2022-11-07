@@ -10,7 +10,7 @@
 <h1>percobaan</h1>
     <form action="" method="POST">
         <label>kalimat</label> <br>
-        <textarea name="kalimat" id="" cols="30" rows="10"></textarea>
+        <textarea name="kalimat" id="" cols="60" rows="10" placeholder="Masukkan Kalimat"></textarea>
 
         <div>
             <label >cari</label> <br>
@@ -37,11 +37,16 @@
    if($kalimat) {
     echo "kalimat: $kalimat <br>";
    }
-   if($target) {
-    echo "cari kalimat: <span class='target'>$target</span> <br> ";
+   if(empty($target)) {
+    echo "  ";
    }
-   if($ganti) {
-    echo " hasil teks setelah di ganti: <br>" . preg_replace($target2,"<span class='target'>$ganti</span>" , $kalimat); // Outputs "Visit;
+   else {
+    echo "cari kalimat: <span class='target'>$target</span> <br>";
+   }
+   if(empty($ganti)) {
+     echo "Masukkan teks";
+   } else {
+    echo " hasil teks setelah di ganti: <br>" . preg_replace($target2,"<span class='target'>$ganti</span>" , $kalimat);
    }
    
    
