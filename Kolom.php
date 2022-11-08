@@ -83,6 +83,7 @@
     <table class="table">
   <thead>
     <tr>
+      <th scope="col">Menu</th>
       <th scope="col">#</th>
       <th scope="col">year</th>
       <th scope="col">month</th>
@@ -93,6 +94,7 @@
       <th scope="col">thur</th>  
     </tr>
   </thead>
+  
   <tbody>
 
 
@@ -119,7 +121,8 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     echo "
     <tr>
-      <th scope=\"row\">" . $row["ID"]. "</th>
+    <td><a href=\"edit.php?id=".$row["ID"]."\" > Edit</a></td>
+      <td>" . $row["ID"]. "</td>
       <td>" . $row["Year"]. "</td>
       <td>" . $row["month"]. "</td>
       <td>" . $row["date"]. "</td>

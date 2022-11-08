@@ -8,8 +8,10 @@
 </head>
 <body>
     <form action="" method="post">
+        <label for="input">Nama</label>
     <input type="text" name="input">
     <br>
+    <label for="jumlah">Jumlah</label>
     <input type="number"name="jumlah"><br>
     <button>submit</button>
     <br>    

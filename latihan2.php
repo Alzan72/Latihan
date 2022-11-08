@@ -11,6 +11,8 @@
 <form action="" method="get">
     <label for="angka">Masukkan angka</label>
     <input type="text" name="angka">
+    <br>
+    <button>Kirim</button>
 </form>
 
 
