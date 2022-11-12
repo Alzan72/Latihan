@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="" method="get">
         <label for="input">Nama</label>
     <input type="text" name="input">
     <br>
@@ -38,7 +38,17 @@ if ($jumlah) {
         let notice="data tersimpan silahkan";
     </script>
 
-  
+<!-- $notif= "<script>confirm('apakah data ingin dihapus')";
+      if ($notif) {
+        include 'koneksi-server.php';
+        $ID=@$_GET['id'];
+        
+        // DELETE FROM `silabus` WHERE `silabus`.`ID` = 6;
+        
+        $sql="DELETE FROM `silabus` WHERE `ID` = $ID";
+        
+        $conn->query($sql);
+   -->
     
     
     

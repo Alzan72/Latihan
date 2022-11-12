@@ -7,8 +7,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
+    <?php
+    if(isset($_GET['pesan'])){
+		$pesan = $_GET['pesan'];
+		if($pesan == "input"){
+			echo "<script>alert('Data telah di tambahkan')</script>
+      ";
+		}else if($pesan == "update"){
+			echo "<script>alert('Data telah di ubah')</script>
+      ";
+		}else if($pesan == "hapus"){
+			echo "<script>alert('Data telah di hapus')</script>
+      ";
+		}
+	}
+    ?>
     
-
 
     <main>
     <div class="container">
@@ -77,7 +91,7 @@
   </div>
 
   
-
+<a href="tambah.php">+ Tambah data</a>
     </main>
 
     <table class="table">
@@ -99,19 +113,12 @@
 
 
 <?php
+// $pesan = $_GET['pesan'];
+// if($pesan == "update"){
+//   echo "Data berhasil di input.";
+// };
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "test";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+include 'koneksi-server.php';
 
 $sql = "SELECT * FROM `silabus`";
 $result = $conn->query($sql);
@@ -121,8 +128,8 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     echo "
     <tr>
-    <td><a href=\"edit.php?id=".$row["ID"]."\" > Edit</a></td>
-      <td>" . $row["ID"]. "</td>
+    <td><a href=\"edit.php?id=".$row["ID"]."\" > Edit</a> <a href=\"hapus.php?id=".$row["ID"]."\" > Hapus</a></td>
+      <td> idbc-". $row["ID"]. "</td>
       <td>" . $row["Year"]. "</td>
       <td>" . $row["month"]. "</td>
       <td>" . $row["date"]. "</td>
