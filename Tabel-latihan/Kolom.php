@@ -110,9 +110,14 @@ $data="SELECT * FROM `silabus`";
 $hasildata=$conn->query($data);
 $jumlahdata=$hasildata->num_rows;
 $jumlahHalaman=ceil($jumlahdata/$dataTampil);
-var_dump($jumlahHalaman);
+ if (isset($_GET['halaman'])) {
+  $halaman=$_GET['halaman'];
+}else {
+  $halaman=1;
+};
+$awaldata=($dataTampil * $halaman)-$dataTampil;
 
-$sql = "SELECT * FROM `silabus` LIMIT 0,$dataTampil";
+$sql = "SELECT * FROM `silabus` LIMIT $awaldata , $dataTampil";
 $result = $conn->query($sql);
 
 $no=1;
@@ -156,8 +161,37 @@ $conn->close();
 </form>
 
 
+
 </tbody>
 </table>
+
+<div class="row justify-content-center">
+<div class="col-5">
+<nav aria-label="Page navigation example" >
+  <ul class="pagination">  
+<?php
+$halkurang=$halaman-1;
+if ($halaman > 1) {
+  echo "<li class='page-item'><a class='page-link' href='?halaman=$halkurang'>Previous</a></li>";
+}
+
+for ($i=1; $i <= $jumlahHalaman; $i++) { 
+  if ($i == $halaman) {
+    echo "<li class='page-item active'><a class='page-link' href='?halaman=$i'>$i</a></li>";
+  } else {
+    echo "<li class='page-item '><a class='page-link' href='?halaman=$i'>$i</a></li>";
+  }
+  
+}
+$haltambah=$halaman+1;
+if ( $halaman <$jumlahHalaman) {
+  echo "<li class='page-item'><a class='page-link' href='?halaman=$haltambah'>Next</a></li>";
+}
+?>
+  </ul>
+</nav>
+</div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   </body>
