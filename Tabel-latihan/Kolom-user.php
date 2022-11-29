@@ -4,37 +4,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
-    
     <?php
-    session_start();
-// login
-if(@$_SESSION['status']!="login" ){
-  header("location:login.php?pesan=belum_login");
-} else {
-  echo "";
-}
+  session_start();
+  // login
+  if(@$_SESSION['status']!="login" ){
+    header("location:login.php?pesan=belum_login");
+  } else {
+    echo "";
+  }
+
+
     if(isset($_GET['pesan'])){
 		$pesan = $_GET['pesan'];
 		if($pesan == "input"){
 			echo "<script>alert('Data telah di tambahkan')</script>
       ";
 		}else if($pesan == "update"){
-			echo "<script>alert('Data telah di disimpan')</script>
+			echo "<script>alert('Data telah di ubah')</script>
       ";
 		}else if($pesan == "hapus"){
 			echo "<script>alert('Data telah di hapus')</script>
       ";
 		}
-    else if($pesan == "pilih-data"){
-			echo "<script>alert('Pilih data yang ingin dihapus')</script>
-      ";
-		}
-    
-}
+	}
     ?>
     
 
@@ -64,24 +59,17 @@ if(@$_SESSION['status']!="login" ){
     </div>
   </div>
 
- 
-<?php
-$user=@$_SESSION['username'];
-
-echo "<a href=tambah-admin.php?user=$user>+ Tambah data</a>"  
-
-?>
+  <?php
+  $user=@$_SESSION['username'];
+  echo "<a href=tambah-user.php?user=$user>+ Tambah data</a>"
+  ?>
     </main>
 
     <table class="table">
   <thead>
     <tr>
       <th scope="col">Menu</th>
-      <th scope="col">Pilih</th>
-      <th scope="col">ID.</th>
-      <th scope="col">No.</th>
-      <th scope="col">Tanggal</th>
-      <th scope="col">Penjual</th>
+      <th scope="col">#</th>
       <th scope="col">year</th>
       <th scope="col">month</th>
       <th scope="col">date</th>
@@ -91,7 +79,6 @@ echo "<a href=tambah-admin.php?user=$user>+ Tambah data</a>"
       <th scope="col">thur</th>  
     </tr>
   </thead>
-  
   
   <tbody>
 
@@ -105,32 +92,16 @@ echo "<a href=tambah-admin.php?user=$user>+ Tambah data</a>"
 include 'koneksi-server.php';
 
 
-$dataTampil=10;
-$data="SELECT * FROM `silabus`";
-$hasildata=$conn->query($data);
-$jumlahdata=$hasildata->num_rows;
-$jumlahHalaman=ceil($jumlahdata/$dataTampil);
-var_dump($jumlahHalaman);
-
-$sql = "SELECT * FROM `silabus` LIMIT 0,$dataTampil";
+$sql = "SELECT * FROM `silabus` WHERE penjual='$user'";
 $result = $conn->query($sql);
 
-$no=1;
-
-
-echo "<form action='hapus.php' method='post'>";
-
-
+if ($result->num_rows > 0) {
+  // output data of each row
   while($row = $result->fetch_assoc()) {
     echo "
-    <tr> 
-    
-    <td><a href=\"edit.php?id=".$row["ID"]."\" >detail</a> </td>
-      <td> <input type='checkbox' name='list[]'  value=".$row["ID"]."> </td>
+    <tr>
+    <td><a href=\"edit.php?id=".$row["ID"]."\" > Edit</a> <a href=\"hapus.php?id=".$row["ID"]."\" > Hapus</a></td>
       <td> idbc-". $row["ID"]. "</td>
-      <td> $no</td>
-      <td>". date('d-m-y | H-i', strtotime($row["Tanggal"])) ."</td>
-      <td>" . $row["penjual"]. "</td>
       <td>" . $row["Year"]. "</td>
       <td>" . $row["month"]. "</td>
       <td>" . $row["date"]. "</td>
@@ -138,24 +109,19 @@ echo "<form action='hapus.php' method='post'>";
       <td>" . $row["tue"]. "</td>
       <td>" . $row["wed"]. "</td>
       <td>" . $row["thur"]. "</td>
-     
-      
     </tr>";
-    
-    $no++;
+
 
   }
-
+} else {
+  echo "0 results";
+}
 $conn->close();
 
+
 ?>
+
 <a href="logout.php">Log Out</a> <br>
-<button>hapus</button>
-
-
-</form>
-
-
 </tbody>
 </table>
 

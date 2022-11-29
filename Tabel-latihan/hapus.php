@@ -1,12 +1,21 @@
 <?php
 include 'koneksi-server.php';
-$ID=@$_GET['id'];
 
-// DELETE FROM `silabus` WHERE `silabus`.`ID` = 6;
+$list=@$_POST['list'];
 
-$sql="DELETE FROM `silabus` WHERE `ID` = $ID";
+if (isset($list)) {
 
-$conn->query($sql);
+$jumlah_list=count($list);
+for ($i=0; $i <$jumlah_list ; $i++) {
 
-header("location:Kolom.php?pesan=hapus");
+        $sql="DELETE FROM `silabus` WHERE `ID` = $list[$i]";
+    
+        $conn->query($sql);
+    }
+    
+    header("location:Kolom.php?pesan=hapus");
+} else {
+header("location:Kolom.php?pesan=pilih-data");
+}
 ?>
+;

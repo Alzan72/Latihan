@@ -28,30 +28,6 @@ if ($result->num_rows > 0) {
  
   <?php
   $data = $result->fetch_assoc();
-
-  $yearErr = $dateErr = $weekErr = "";
-  $year= $date = $week = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (empty($_POST["year"])) {
-    $yearErr = "Name is required";
-  } else {
-    $year = test_input($_POST["year"]);
-  }
-
-  if (empty($_POST["date"])) {
-    $dateErr = "Email is required";
-  } else {
-    $date = test_input($_POST["date"]);
-  }
-
-  if (empty($_POST["week"])) {
-    $weekErr = "week is required";
-  } else {
-    $week = test_input($_POST["week"]);
-  }
-}
-
     ?>
 
 

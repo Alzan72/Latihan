@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>percobaan</h1>
-    <form action="" method="POST">
+    <form action="" method="GET">
         <label for="">Nama</label> <br>
         <input type="text" name="nama">
 
@@ -20,11 +20,15 @@
     </form>
 
     <?php
-   $nama=@$_POST['nama'];
-   $usia=@$_POST['usia'];
+    include 'aes.php';
+   $nama=@$_GET['nama'];
+   $usia=@$_GET['usia'];
+   $key="abcdefghijuklmno0123456789012345";
+$aes=new Aes($key);
+$pass=$aes->encrypt($nama);
 
    if($nama) {
-    echo "Selamat datang $nama <br>";
+    echo "Selamat datang $pass <br>";
    }
    if($usia) {
     echo "usia anda $usia tahun";

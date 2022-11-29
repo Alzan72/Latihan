@@ -13,6 +13,7 @@ $(document).ready(function(){
   $("#btn2").click(function(){
     $("#form").append("<br> <label for=''>ID=(dari server)</label> "+
     "<input type='hidden' name='id[]'> <br>"+
+    "<input type='hidden' name='penjual[]' value='<?php echo $_GET['user']?>'> <br>"+
 
     "<label for=''>Year</label><br>"+
     "<input type='number' name='year[]' required> "+
@@ -23,7 +24,7 @@ $(document).ready(function(){
     "<span class='error'>* </span><br>"+
 
     "<label for=''>month</label><br>"+
-    "<input type='number' name='month[]' required> "+
+    "<input type='text' name='month[]' required> "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>date</label><br>"+
@@ -31,15 +32,15 @@ $(document).ready(function(){
     "<span class='error'>* </span><br>"+
 
     "<label for=''>mon</label><br>"+
-    "<input type='number' name='mon[]' required> "+
+    "<input type='text' name='mon[]' required> "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>tue</label><br>"+
-    "<input type='number' name='tue[]' required> "+
+    "<input type='text' name='tue[]' required> "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>wed</label><br>"+
-    "<input type='number' name='wed[]' required> "+
+    "<input type='text' name='wed[]' required> "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>thur</label><br>"+
@@ -58,11 +59,18 @@ $(document).ready(function(){
 
 <div>
 
+<?php
+session_start();
+?>
+
+<form action='tambah-aksi-admin.php' method='post'>
     
-    <form action="tambah-aksi-copy.php" method="post">
         
-            <label for="">ID=(dari server)</label> 
+        <label for="">ID=(dari server)</label> 
         <input type="hidden" name="id[]"> <br>
+        <input type="hidden" name="penjual[]" value="<?php echo $_GET['user']?>"> <br>
+
+        
 
         <label for="">Year</label><br>
         <input type="number" name="year[]" required> 
