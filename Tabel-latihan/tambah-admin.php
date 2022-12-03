@@ -40,7 +40,7 @@ $(document).ready(function(){
     "<span class='error'>* </span><br>"+
 
     "<label for=''>wed</label><br>"+
-    "<input type='text' name='wed[]' required> "+
+    "<input type='file' name='file[]' required> "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>thur</label><br>"+
@@ -61,17 +61,24 @@ $(document).ready(function(){
 
 <?php
 session_start();
+$pesan=@$_GET['pesan'];
+if (isset($pesan)) {
+  if ($pesan=='ekstensi') {
+    echo "<script>alert('file harus .png , .jpg , .jpeg')</script>";
+  } elseif ($pesan=='ukuran') {
+    echo "<script>alert('Ukuran file maksimal 3MB')</script>";
+  }
+}
 ?>
 
-<form action='tambah-aksi-admin.php' method='post'>
+<form action="tambah-aksi-admin.php" method="post" enctype="multipart/form-data">
     
         
         <label for="">ID=(dari server)</label> 
         <input type="hidden" name="id[]"> <br>
-        <input type="hidden" name="penjual[]" value="<?php echo $_GET['user']?>"> <br>
+        <input type="hidden" name="penjual[]" value="<?php echo @$_POST['tambah']?>"> <br>
 
         
-
         <label for="">Year</label><br>
         <input type="number" name="year[]" required> 
         <span class="error">* </span><br>
@@ -95,7 +102,7 @@ session_start();
         <input type="text" name="tue[]" > <br>
 
         <label for="">wed</label><br>
-        <input type="text" name="wed[]" > <br>
+        <input type="file" name="file" > <br>
 
         <label for="">Thur</label><br>
         <input type="radio" name="thur[]" value="female" >Female

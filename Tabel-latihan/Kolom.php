@@ -68,18 +68,30 @@ if(@$_SESSION['status']!="login" ){
 <?php
 $user=@$_SESSION['username'];
 
-echo "<a href=tambah-admin.php?user=$user>+ Tambah data</a>"  
 
 ?>
+<!-- tambah -->
+<form action="tambah-admin.php" method="post">
+  <input type="hidden" name="tambah" value="<?php echo $user;?>">
+  <button>tambah data</button>
+</form>
+
+
+
     </main>
+    <form action="" method="post">
+      <label for="">cari</label><br>
+      <input type="text" name="kata" id="">
+      <button name="cari">Cari</button>
+    </form>
 
     <table class="table">
   <thead>
     <tr>
+    <th scope="col">No.</th>
       <th scope="col">Menu</th>
       <th scope="col">Pilih</th>
       <th scope="col">ID.</th>
-      <th scope="col">No.</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Penjual</th>
       <th scope="col">year</th>
@@ -105,10 +117,13 @@ echo "<a href=tambah-admin.php?user=$user>+ Tambah data</a>"
 include 'koneksi-server.php';
 
 
+
 $dataTampil=10;
 $data="SELECT * FROM `silabus`";
 $hasildata=$conn->query($data);
+
 $jumlahdata=$hasildata->num_rows;
+
 $jumlahHalaman=ceil($jumlahdata/$dataTampil);
  if (isset($_GET['halaman'])) {
   $halaman=$_GET['halaman'];
@@ -117,7 +132,18 @@ $jumlahHalaman=ceil($jumlahdata/$dataTampil);
 };
 $awaldata=($dataTampil * $halaman)-$dataTampil;
 
-$sql = "SELECT * FROM `silabus` LIMIT $awaldata , $dataTampil";
+// cari
+$cari=@$_POST['cari'];
+$kata=@$_POST['kata'];
+if (isset($cari)) {
+  $sql="SELECT * FROM silabus WHERE penjual LIKE'%$kata%' OR Year LIKE'%$kata%' OR month LIKE'%$kata%' OR date LIKE'%$kata%' OR week LIKE'%$kata%' OR mon LIKE'%$kata%' OR tue LIKE'%$kata%' OR wed LIKE'%$kata%' OR thur LIKE'%$kata%'";
+} else {
+  $sql = "SELECT * FROM `silabus` LIMIT $awaldata , $dataTampil";
+}
+
+// cari
+
+
 $result = $conn->query($sql);
 
 $no=1;
@@ -125,15 +151,14 @@ $no=1;
 
 echo "<form action='hapus.php' method='post'>";
 
-
   while($row = $result->fetch_assoc()) {
     echo "
-    <tr> 
-    
+    <tr>
+    <td>$no</td>
     <td><a href=\"edit.php?id=".$row["ID"]."\" >detail</a> </td>
       <td> <input type='checkbox' name='list[]'  value=".$row["ID"]."> </td>
       <td> idbc-". $row["ID"]. "</td>
-      <td> $no</td>
+      
       <td>". date('d-m-y | H-i', strtotime($row["Tanggal"])) ."</td>
       <td>" . $row["penjual"]. "</td>
       <td>" . $row["Year"]. "</td>
@@ -141,15 +166,16 @@ echo "<form action='hapus.php' method='post'>";
       <td>" . $row["date"]. "</td>
       <td>" . $row["mon"]. "</td>
       <td>" . $row["tue"]. "</td>
-      <td>" . $row["wed"]. "</td>
+      <td><img src='gambar/" . $row["wed"]. " 'width=60px height=40px> </td>
       <td>" . $row["thur"]. "</td>
      
       
     </tr>";
-    
     $no++;
+    
 
   }
+  
 
 $conn->close();
 
@@ -170,13 +196,16 @@ $conn->close();
 <nav aria-label="Page navigation example" >
   <ul class="pagination">  
 <?php
+if (!isset($cari)) {
+  # code...
+
 $halkurang=$halaman-1;
 if ($halaman > 1) {
   echo "<li class='page-item'><a class='page-link' href='?halaman=$halkurang'>Previous</a></li>";
 }
 
 for ($i=1; $i <= $jumlahHalaman; $i++) { 
-  if ($i == $halaman) {
+  if ($i == $halaman ) {
     echo "<li class='page-item active'><a class='page-link' href='?halaman=$i'>$i</a></li>";
   } else {
     echo "<li class='page-item '><a class='page-link' href='?halaman=$i'>$i</a></li>";
@@ -186,6 +215,7 @@ for ($i=1; $i <= $jumlahHalaman; $i++) {
 $haltambah=$halaman+1;
 if ( $halaman <$jumlahHalaman) {
   echo "<li class='page-item'><a class='page-link' href='?halaman=$haltambah'>Next</a></li>";
+}
 }
 ?>
   </ul>
