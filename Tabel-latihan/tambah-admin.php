@@ -13,7 +13,7 @@ $(document).ready(function(){
   $("#btn2").click(function(){
     $("#form").append("<br> <label for=''>ID=(dari server)</label> "+
     "<input type='hidden' name='id[]'> <br>"+
-    "<input type='hidden' name='penjual[]' value='<?php echo $_GET['user']?>'> <br>"+
+    "<input type='hidden' name='penjual[]' value='<?php echo $_POST['tambah']?>'> <br>"+
 
     "<label for=''>Year</label><br>"+
     "<input type='number' name='year[]' required> "+
@@ -32,15 +32,15 @@ $(document).ready(function(){
     "<span class='error'>* </span><br>"+
 
     "<label for=''>mon</label><br>"+
-    "<input type='text' name='mon[]' required> "+
+    "<input type='text' name='mon[]' > "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>tue</label><br>"+
-    "<input type='text' name='tue[]' required> "+
+    "<input type='text' name='tue[]' > "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>wed</label><br>"+
-    "<input type='file' name='file[]' required> "+
+    "<input type='file' name='file[]' multiple> "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>thur</label><br>"+
@@ -102,7 +102,7 @@ if (isset($pesan)) {
         <input type="text" name="tue[]" > <br>
 
         <label for="">wed</label><br>
-        <input type="file" name="file" > <br>
+        <input type="file" name="file[]" multiple > <br>
 
         <label for="">Thur</label><br>
         <input type="radio" name="thur[]" value="female" >Female

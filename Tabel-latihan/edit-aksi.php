@@ -16,8 +16,5 @@ $sql="UPDATE `silabus` SET `Year` = '$year', `month` = '$month', `date` = '$date
 
 $conn->query($sql);
 
-
-// $sql = "UPDATE `silabus` SET `Year` = \'$year\', `month` = \'$month\', `date` = \'$date\', `week` = \'$week\', `mon` = \'$mon\', `tue` = \'$tue\', `wed` = \'$wed\', `thur` = \'$thur\' WHERE `silabus`.`ID` = $ID;";
-
 header("location:Kolom.php?pesan=update");
 ?>

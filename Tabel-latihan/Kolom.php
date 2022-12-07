@@ -67,10 +67,8 @@ if(@$_SESSION['status']!="login" ){
  
 <?php
 $user=@$_SESSION['username'];
-
-
 ?>
-<!-- tambah -->
+<!-- tambah data -->
 <form action="tambah-admin.php" method="post">
   <input type="hidden" name="tambah" value="<?php echo $user;?>">
   <button>tambah data</button>
@@ -166,7 +164,7 @@ echo "<form action='hapus.php' method='post'>";
       <td>" . $row["date"]. "</td>
       <td>" . $row["mon"]. "</td>
       <td>" . $row["tue"]. "</td>
-      <td><img src='gambar/" . $row["wed"]. " 'width=60px height=40px> </td>
+      <td><a href='gambar/" . $row["wed"]. " ' target='_blank'><img src='gambar/" . $row["wed"]. " 'width=60px height=40px></a> </td>
       <td>" . $row["thur"]. "</td>
      
       
