@@ -63,7 +63,9 @@ if ($result->num_rows > 0) {
         <input type="text" name="tue" value="<?php echo $data['tue'] ?>"> <br>
 
         <label for="">wed</label><br>
-        <input type="text" name="wed" value="<?php echo $data['wed'] ?>"> <br>
+        <img src="gambar/<?php echo $data['wed'] ?>" width=60px height=60px><br>
+        
+        <input type="file" name="wed" value="<?php echo $data['wed'] ?>"> <br>
 
         <label for="">Thur</label><br>
         <input type="radio" name="thur" value="female" <?php if($data['thur']=='female') echo 'checked'?>>Female

@@ -9,11 +9,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
+      <?php
+      session_start();
+      ?>
 $(document).ready(function(){
   $("#btn2").click(function(){
     $("#form").append("<br> <label for=''>ID=(dari server)</label> "+
     "<input type='hidden' name='id[]'> <br>"+
-    "<input type='hidden' name='penjual[]' value='<?php echo $_GET['user']?>'> <br>"+
+    "<input type='hidden' name='penjual[]' value='<?php echo $_SESSION['username']?>'> <br>"+
 
     "<label for=''>Year</label><br>"+
     "<input type='number' name='year[]' required> "+
@@ -32,15 +35,15 @@ $(document).ready(function(){
     "<span class='error'>* </span><br>"+
 
     "<label for=''>mon</label><br>"+
-    "<input type='text' name='mon[]' required> "+
+    "<input type='text' name='mon[]' > "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>tue</label><br>"+
-    "<input type='text' name='tue[]' required> "+
+    "<input type='text' name='tue[]' > "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>wed</label><br>"+
-    "<input type='text' name='wed[]' required> "+
+    "<input type='file' name='file[]' multiple > "+
     "<span class='error'>* </span><br>"+
 
     "<label for=''>thur</label><br>"+
@@ -55,20 +58,30 @@ $(document).ready(function(){
 </head>
 <body>
 
+<?php
+  if (isset($_GET['pesan'])) {
+    if (@$_GET['pesan']=='ekstensi') {
+      echo "<script>alert('File hanya berformat .png .jpg .jpeg')</script>";
+    }else if (@$_GET['pesan']=='ukuran') {
+      echo "<script>alert('Ukuran maksimal 3 MB')</script>";
+    }
+  }
+ 
+
+?>
+
 <button id="btn2">tambah data</button>
 
 <div>
 
-<?php
-session_start();
-?>
 
-<form action='tambah-aksi-user.php' method='post'>
+
+<form action='tambah-aksi-user.php' method='post' enctype="multipart/form-data">
     
         
         <label for="">ID=(dari server)</label> 
         <input type="hidden" name="id[]"> <br>
-        <input type="hidden" name="penjual[]" value="<?php echo $_GET['user']?>"> <br>
+        <input type="hidden" name="penjual[]" value="<?php echo $_SESSION['username']?>"> <br>
 
         
 
@@ -95,7 +108,7 @@ session_start();
         <input type="text" name="tue[]" > <br>
 
         <label for="">wed</label><br>
-        <input type="text" name="wed[]" > <br>
+        <input type="file" name="file[]" multiple> <br>
 
         <label for="">Thur</label><br>
         <input type="radio" name="thur[]" value="female" >Female

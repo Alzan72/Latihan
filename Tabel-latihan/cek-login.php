@@ -23,6 +23,11 @@ $jikaada =$result->num_rows;
 
 if($jikaada > 0) {
 
+    if (isset($_POST['cookie'])) {
+        setcookie('status','sudahlogin', time() + 120);
+        setcookie('user',$username,time() + 120);
+    }
+
     $data=$result->fetch_assoc();
 
     if ($data['hak-akses']=='admin'){

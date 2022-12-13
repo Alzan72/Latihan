@@ -17,7 +17,6 @@ $tue=@$_POST['tue'];
 $thur=@$_POST['thur'];
 
 
-
 $jumlah_id=count($ID);
 for ($i=0; $i < $jumlah_id; $i++) { 
 //file
@@ -39,7 +38,6 @@ $ekstensifileupload=strtolower(end($ekstensifileupload));//ambil bagian paling a
 //angka random
 $random=rand();
 
-//jika ekstensi tidak sesuai
 if(!in_array($ekstensifileupload,$ekstensi)) {
 header("location:tambah-admin.php?pesan=ekstensi");
 } else {
@@ -55,11 +53,14 @@ header("location:tambah-admin.php?pesan=ekstensi");
          $sql="INSERT INTO `silabus` (`ID`,`Tanggal`,`penjual`,`Year`, `month`, `date`, `week`, `mon`, `tue`, `wed`, `thur`) VALUES ( NULL, NOW(),'$penjual[$i]','$year[$i]', '$month[$i]', '$date[$i]', '$week[$i]', '$mon[$i]', '$tue[$i]', '$namafilesimpan', '$thur[$i]');";
 
         $conn->query($sql);
+        header ("location:Kolom.php?pesan=input");
 }
 
-        header ("location:Kolom.php?pesan=input");
+        
     }
+ 
 }
+
 
 
 

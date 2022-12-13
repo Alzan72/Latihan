@@ -29,7 +29,8 @@ if(isset($_GET['pesan'])){
     <input type="text" name="username" placeholder="Masukkan username"><br>
 
     <label for="">Password</label> <br>
-    <input type="password" name="password" placeholder="masukkan password">
+    <input type="password" name="password" placeholder="masukkan password"><br>
+    <input type="checkbox" name="cookie"><label for="cookie">Remember me</label> <br>
     <button>login</button>
 </form>
 </body>

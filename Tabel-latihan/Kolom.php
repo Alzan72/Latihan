@@ -11,6 +11,15 @@
     
     <?php
     session_start();
+
+    //cookie
+    if (isset($_COOKIE['status'])) {
+      if (@$_COOKIE['status']='sudahlogin') { 
+        @$_SESSION['status']='login';
+        @$_SESSION['username']=$_COOKIE['user'];
+      }
+    };
+
 // login
 if(@$_SESSION['status']!="login" ){
   header("location:login.php?pesan=belum_login");
@@ -54,7 +63,7 @@ if(@$_SESSION['status']!="login" ){
 
   <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold">Centered hero</h1>
+    <h1 class="display-5 fw-bold">Welcome ,<?php echo $_SESSION['username']; ?></h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -65,14 +74,9 @@ if(@$_SESSION['status']!="login" ){
   </div>
 
  
-<?php
-$user=@$_SESSION['username'];
-?>
+
 <!-- tambah data -->
-<form action="tambah-admin.php" method="post">
-  <input type="hidden" name="tambah" value="<?php echo $user;?>">
-  <button>tambah data</button>
-</form>
+<a href="tambah-admin.php">+ Tambah data</a>
 
 
 

@@ -76,7 +76,7 @@ if (isset($pesan)) {
         
         <label for="">ID=(dari server)</label> 
         <input type="hidden" name="id[]"> <br>
-        <input type="hidden" name="penjual[]" value="<?php echo @$_POST['tambah']?>"> <br>
+        <input type="hidden" name="penjual[]" value="<?php echo @$_SESSION['username']?>"> <br>
 
         
         <label for="">Year</label><br>

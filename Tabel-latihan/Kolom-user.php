@@ -9,6 +9,15 @@
   <body>
     <?php
   session_start();
+
+
+  
+    if (@$_COOKIE['status']='sudahlogin') {
+      @$_SESSION['status']='login';
+      @$_SESSION['username']=@$_COOKIE['user'];
+    }
+  
+
   // login
   if(@$_SESSION['status']!="login" ){
     header("location:login.php?pesan=belum_login");
@@ -49,7 +58,7 @@
 
   <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-    <h1 class="display-5 fw-bold">Centered hero</h1>
+    <h1 class="display-5 fw-bold">Welcome, <?php echo @$_SESSION['username']; ?></h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -61,7 +70,7 @@
 
   <?php
   $user=@$_SESSION['username'];
-  echo "<a href=tambah-user.php?user=$user>+ Tambah data</a>"
+  echo "<a href=tambah-user.php?>+ Tambah data</a>"
   ?>
     </main>
 
@@ -69,6 +78,7 @@
   <thead>
     <tr>
       <th scope="col">Menu</th>
+      <th scope="col">NO</th>
       <th scope="col">#</th>
       <th scope="col">year</th>
       <th scope="col">month</th>
@@ -108,20 +118,22 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   // output data of each row
+  $no=1;
   while($row = $result->fetch_assoc()) {
     echo "
     <tr>
     <td><a href=\"edit.php?id=".$row["ID"]."\" > Edit</a> <a href=\"hapus.php?id=".$row["ID"]."\" > Hapus</a></td>
+      <td>$no</td>
       <td> idbc-". $row["ID"]. "</td>
       <td>" . $row["Year"]. "</td>
       <td>" . $row["month"]. "</td>
       <td>" . $row["date"]. "</td>
       <td>" . $row["mon"]. "</td>
       <td>" . $row["tue"]. "</td>
-      <td>" . $row["wed"]. "</td>
+      <td><a href='gambar/".$row["wed"] ."' target='_blank' ><img src='gambar/".$row["wed"] ."' width=60px height=60px> </a></td>
       <td>" . $row["thur"]. "</td>
     </tr>";
-
+    $no++;
 
   }
 } else {
