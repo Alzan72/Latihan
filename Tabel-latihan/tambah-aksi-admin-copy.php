@@ -1,24 +1,24 @@
 <?php
 
 include'koneksi-server.php';
-
-
-
-$number="1212-";
-$ID=@$_POST['id'];
-$tanggal=@$_POST['tanggal'];
-$penjual=@$_POST['penjual'];
-$week=@$_POST['week'];
-$year=@$_POST['year'];
-$date=@$_POST['date'];
-$month=@$_POST['month'];
-$mon=@$_POST['mon'];
-$tue=@$_POST['tue'];
-$thur=@$_POST['thur'];
-
-
-$jumlah_id=count($ID);
+$Id=@$_POST['id'];
+$jumlah_id=count($Id);
 for ($i=0; $i < $jumlah_id; $i++) { 
+$number="1212-";
+$ID=@$_POST['id'][$i];
+$tanggal=@$_POST['tanggal'][$i];
+$penjual=@$_POST['penjual'][$i];
+$week=@$_POST['week'][$i];
+$year=@$_POST['year'][$i];
+$date=@$_POST['date'][$i];
+$month=@$_POST['month'][$i];
+$mon=@$_POST['mon'][$i];
+$tue=@$_POST['tue'][$i];
+$thur=@$_POST['thur'][$i];
+
+
+
+
 //file
 $namafile=@$_FILES['file']['name'][$i];
 
@@ -49,7 +49,7 @@ header("location:tambah-admin.php?pesan=ekstensi");
         $namafilesimpan=$random.'-'.$namafile;
         move_uploaded_file($tmpname,$direktori.$namafilesimpan);
         //jalankan query
-         $sql="INSERT INTO `silabus` (`ID`,`Tanggal`,`penjual`,`Year`, `month`, `date`, `week`, `mon`, `tue`, `wed`, `thur`) VALUES ( NULL, NOW(),'$penjual[$i]','$year[$i]', '$month[$i]', '$date[$i]', '$week[$i]', '$mon[$i]', '$tue[$i]', '$namafilesimpan', '$thur[$i]');";
+         $sql="INSERT INTO `silabus` (`ID`,`Tanggal`,`penjual`,`Year`, `month`, `date`, `week`, `mon`, `tue`, `wed`, `thur`) VALUES ( NULL, NOW(),'$penjual','$year', '$month', '$date', '$week', '$mon', '$tue', '$namafilesimpan', '$thur');";
 
         $conn->query($sql);
         header ("location:Kolom.php?pesan=input");

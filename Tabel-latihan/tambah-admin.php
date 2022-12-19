@@ -7,13 +7,15 @@
     <title>Document</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    <?php
+      session_start();
+      ?>
     <script>
 $(document).ready(function(){
   $("#btn2").click(function(){
     $("#form").append("<br> <label for=''>ID=(dari server)</label> "+
     "<input type='hidden' name='id[]'> <br>"+
-    "<input type='hidden' name='penjual[]' value='<?php echo $_POST['tambah']?>'> <br>"+
+    "<input type='hidden' name='penjual[]' value='<?php echo $_SESSION['username']?>'> <br>"+
 
     "<label for=''>Year</label><br>"+
     "<input type='number' name='year[]' required> "+
@@ -71,7 +73,7 @@ if (isset($pesan)) {
 }
 ?>
 
-<form action="tambah-aksi-admin.php" method="post" enctype="multipart/form-data">
+<form action="tambah-aksi-admin-copy.php" method="post" enctype="multipart/form-data">
     
         
         <label for="">ID=(dari server)</label> 

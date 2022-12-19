@@ -14,6 +14,7 @@ $mon=@$_POST['mon'];
 $tue=@$_POST['tue'];
 $thur=@$_POST['thur'];
 
+
 $jumlah_id=count($ID);
 
 for ($i=0; $i < $jumlah_id; $i++) { 
@@ -26,6 +27,7 @@ for ($i=0; $i < $jumlah_id; $i++) {
     $ekstensi=['png','jpg','jpeg'];
     $random=rand();
     $namafilesimpan=$random.'-'.$namafile;
+    var_dump($_FILES);die;
     
     if (!in_array($tipefile,$ekstensi)) {
         header("location:tambah-user.php?pesan=ekstensi");
