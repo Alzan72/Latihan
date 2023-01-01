@@ -1,0 +1,71 @@
+
+#header {
+    animation: header 1s ease 0s 1 normal forwards;
+}
+@keyframes header {
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}	
+
+#formulir {
+    animation: myAnim 2s ease 0s 1 normal forwards;
+    box-shadow: 1px 9px 10px 7px #777575, 5px 5px 10px 1px #000;
+    outline: 1px solid #080808;
+    transition: width 1s ease 0s;
+height: fit-content;
+margin-bottom: 50px;
+}
+#formulir:hover {
+    /* Menambahkan box-shadow saat elemen di-hover */
+    box-shadow: 5px 5px 10px 1px #000;
+    /* Menambahkan warna background saat elemen di-hover */
+    background-color: #f2f2f2;
+  }
+
+@keyframes myAnim {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0);
+		transform-origin: 50% 50%;
+	}
+
+	15% {
+		transform: translateY(-30px) rotate(-6deg);
+	}
+
+	30% {
+		transform: translateY(15px) rotate(6deg);
+	}
+
+	45% {
+		transform: translateY(-15px) rotate(-3.6deg);
+	}
+
+	60% {
+		transform: translateY(9px) rotate(2.4deg);
+	}
+
+	75% {
+		transform: translateY(-6px) rotate(-1.2deg);
+	}
+}
+
+#list-data {
+
+    overflow: scroll;
+    max-height: 500px;
+}
+
+
+/* responsive */
+
+@media screen and (max-width: 500px) {
+    
+ }

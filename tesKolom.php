@@ -28,7 +28,7 @@
 	<a class="tombol" href="input.php">+ Tambah Data Baru</a>
  
 	<h3>Data user</h3>
-	<table border="1" class="table">
+	<table border="1"` class="table">
 		<tr>
         <th>year</th>
 			<th>month</th>

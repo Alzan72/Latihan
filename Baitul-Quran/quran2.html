@@ -120,15 +120,22 @@ const table = $('<table class="table">').html(markup);
 
   $('.ayat').on('click', function (event) {
         // console.log($(event.target).data("idsurat"));
-        $.getJSON("https://api.alquran.cloud/v1/surah/"+$(event.target).data("idsurat")+"?offset=0&limit=10", (respon) => {
+        $.getJSON("https://api.alquran.cloud/v1/surah/"+$(event.target).data("idsurat"), (respon) => {
           console.log(respon.code);
           console.log(respon.status);
-    const ayah=`
-    ${respon.data.ayahs.map(item => `
-    <tr style="border-bottom:1px solid black; padding:10px 0px 10px 3px;text-align:right;"><td style="border-right:1px solid black">${item.numberInSurah}</td> <td>${item.text}</td></tr>
-`).join('')} `;
-    const ayat=$('<table class="table table-bordered border-primary">').html(ayah);
-      $('#list-ayat').html(ayat);
+          let a = respon.data.ayahs;
+          console.log(a.length);
+    for (let i = 0; i < a.length; i++) {
+      let b = a[i]; 
+
+      document.getElementById("list-ayat").innerHTML +=` <tr> ${b.text}</tr> `;
+
+
+    }
+    
+
+    
+      
     
         } )
         
