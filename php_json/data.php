@@ -38,7 +38,7 @@ while ($data =$hasil->fetch_assoc()) {
         <td><?php echo $no?></td>
         <td><?php echo $data['ID']?></td>
         <td><?php echo $data['Nama']?></td>
-        <td><?php echo $data['ttl']?></td>
+        <td><?php echo $data['ttl']?></td>  
         <td><?php echo $data['jenis-kelamin']?></td>
         <td><?php echo $data['Alamat']?></td>
         <td><button class='btn btn-danger delete' data-id="<?php echo $data['ID']?>">Delete</button></td>
@@ -71,7 +71,23 @@ $(".delete").click(function() {
         // $(this).closest("tr").remove();
       }
     });
+    getData();
   });
+
+//   function getData() {
+//         $.get("data.php", function(hasil) {
+//     // display the data from the database
+//     $("#data-show").html(hasil);
+//   });
+//       };
+//   var hapus = document.getElementsByClassName("delete");
+
+// for (let i = 0; i < hapus.length; i++) {
+//  hapus[i].addEventListener("click", getData) ;
+}
+  // display the data from the database
+  
+
 
 
 </script>
