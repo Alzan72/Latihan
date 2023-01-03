@@ -22,7 +22,7 @@
     
     <div class="row pt-5 justify-content-around">
       <div class="col-sm-4 p-3 " id="formulir">
-        <form id="form-example" method="post" action="form-handler.php">
+        <form id="form-example" method="post" action="">
           <!-- nama -->
    <div class="form-floating mb-3">
      <input type="text" name="name" class="form-control" id="floatingInput" placeholder="Masukkan nama" required>
@@ -56,7 +56,7 @@
      <label for="floatingPassword">Tanggal Lahir</label>
    </div><br>
    
-   <button  class="btn btn-primary">Tambah</button>
+   <button  class="btn btn-primary" id="button">Tambah</button>
        </form> 
    
       </div>
@@ -67,7 +67,15 @@
     </div>
 
     <script>
-      // attach a submit handler to the form
+      //function show data
+      function getData() {
+        $.get("data.php", function(value) {
+    // display the data from the database
+    $("#data-show").html(value);
+  });
+ };
+
+// attach a submit handler to the form
       $("#form-example").submit(function(event) {
         // prevent default posting of form
         event.preventDefault();
@@ -78,20 +86,19 @@
         // send the data using post
         $.post("form-action.php", formData, function(response) {
           // display the response from the server
-          $("#form-response").html(response);
+         
         });
+        getData();
       });
 
-      // display the data from the database
-      function getData() {
-        $.get("data.php", function(hasil) {
-    // display the data from the database
-    $("#data-show").html(hasil);
-  });
-      }
-  
+   // display the data from the database    
+  $(document).ready(function() {
+  getData();
+});
+
+// document.getElementById("form-example").addEventListener("submit", getData); 
 // call the getData function every 3 seconds
-setInterval(getData, 1000);
+setInterval(getData, 10000);
 
   //display the data from DB real time
   // function getData() {
