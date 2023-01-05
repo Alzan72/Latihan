@@ -25,8 +25,8 @@ class benda {
  public $nama,
        $wujud;
 
- public function set_nama($input){
-      return $this->nama=$input;
+ public function set_nama($input,$input2){
+      return $this->nama=$input. ' dengan wujud '.$input2;
  }
  
 
@@ -48,7 +48,7 @@ echo 'Produk yang pertama adalah '.$barang1->data().'<br>';
 echo 'Produk yang Kedua adalah '.$barang2->data().'<br>';
 echo 'Produk yang ketiga adalah '.$barang3->data().'<br>';
 echo 'Produk yang keempat adalah '.$barang4->data().'<br>';
-echo $barang5->set_nama('kipas');
+echo $barang5->set_nama('kipas','padat');
 
 
 ?>
