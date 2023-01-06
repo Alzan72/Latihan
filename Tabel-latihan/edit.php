@@ -32,8 +32,6 @@ if ($result->num_rows > 0) {
   $yearErr = $dateErr = $weekErr = "";
   $year= $date = $week = "";
 
-
-
     ?>
 
 

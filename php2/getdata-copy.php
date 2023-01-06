@@ -3,7 +3,7 @@
 include 'koneksi.php';
 
 $id=@$_POST['id'];
-$sql="SELECT * FROM profil WHERE ID ='$id' ";
+$sql="SELECT `profil`.*,kelompok.Kelompok, penempatan.id_kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID join kelompok on kelompok.ID=penempatan.id_kelompok WHERE profil.ID= $id";
 $hasil=$conn->query($sql);
 
 $data=$hasil->fetch_assoc();
@@ -53,19 +53,20 @@ $data=$hasil->fetch_assoc();
 </select>
 <br>
 <select name="kelompok" class="form-select">
-  <option >Kelompok</option>
+<option >Kelompok</option>
   <?php 
-  $query="SELECT `profil`.*,kelompok.Kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID join kelompok on kelompok.ID=penempatan.id_kelompok;";
-  $value=$conn->query($query);
 
+  $query="SELECT * FROM kelompok";
+  $value=$conn->query($query);
   while($kelompok=$value->fetch_assoc()){
   ?>
-  <option value="<?php echo $kelompok['kelompok.ID'] ?>" <?php if ($kelompok['kelompok.ID']==$kelompok['penempatan.id_kelompok']) echo 'selected' ?>><?php echo $kelompok['kelompok.Kelompok'] ?></option>
-   
-</select>
+  <option value="<?php echo $kelompok['ID']?>" <?php  if ($kelompok['ID']==$data['id_kelompok']) echo 'selected'; ?>><?php echo $kelompok['Kelompok']?></option>
 <?php
 }
 ?>
+   
+</select>
+
 <br>
 
 <!-- foto -->
