@@ -58,14 +58,10 @@ $data=$hasil->fetch_assoc();
   $query="SELECT * FROM kelompok";
   $value=$conn->query($query);
 
-  while($kelompok=$value->fetch_assoc()){
+  $kelompok=$value->fetch_assoc()
   ?>
-  <option value="<?php echo $kelompok['ID']?>" <?php //if ($data['jurusan']=="tkj") echo 'selected' ?>><?php echo $kelompok['Kelompok']?></option>  
-  
-
-<?php
-}
-?>
+  <option value="1" <?php if ($kelompok['ID']=="1") echo 'selected' ?>>SMD</option>
+  <option value="2"<?php if ($kelompok['ID']=="2") echo 'selected' ?>>BPN</option>  
 </select>
 <br>
 
