@@ -17,15 +17,11 @@
 <body>
     
 <div class="container">
-  <div class="row text-end">
-    <div class="col"><a href="logout.php" class="btn btn-warning text-end"><<-- Log out</a></div>
-    <div class="col">
-      <form action="" method="get">
-       
-      <input class="" type="text" name="cari" placeholder="Cari kata...">
-      <button name="car">Search</button>
-    </form></div>
-  </div>
+  <?php
+  $menu='tampil';
+  include 'navbar.php';
+  ?>
+ 
     <div class="row">
         <div class="col">
         <table class="table">
@@ -85,10 +81,10 @@ elseif ($_GET['pesan']=='ekstensi') {
   include 'koneksi.php';
   $cari=@$_GET['cari'];
   $car=@$_GET['car'];
-  if (isset($car)) {
-    $sql="SELECT `profil`.* ,penempatan.id,kelompok.Kelompok FROM profil JOIN penempatan on penempatan.id_profil=profil.ID JOIN kelompok on kelompok.ID=penempatan.id WHERE Nama LIKE'%$cari%' OR Alamat LIKE'%$cari%' OR Kelompok LIKE'%$cari%' OR Jurusan LIKE'%$cari%'  ";
+  if (isset($cari)) {
+    $sql="SELECT `profil`.* ,penempatan.id,kelompok.Kelompok FROM profil LEFT JOIN penempatan on penempatan.id_profil=profil.ID LEFT JOIN kelompok on kelompok.ID=penempatan.id WHERE Nama LIKE'%$cari%' OR Alamat LIKE'%$cari%' OR Kelompok LIKE'%$cari%' OR Jurusan LIKE'%$cari%'  ";
   } else {
-    $sql=" SELECT `profil`.* ,penempatan.id , kelompok.Kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID left JOIN kelompok on kelompok.ID=penempatan.id ";
+    $sql=" SELECT `profil`.*,kelompok.Kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID join kelompok on kelompok.ID=penempatan.id_kelompok";
   }
 
   
@@ -103,7 +99,7 @@ elseif ($_GET['pesan']=='ekstensi') {
   <tbody>
     <tr>
       <th scope="row"><?php echo $no ?></th>
-      <td><input type="checkbox" name="hapus[]" value="<?php echo $data['ID'] ?>"></td>
+      <td><input type="checkbox" name="hapus[]" value="<?php //echo $data['id'] ?>"></td>
       <td><?php echo $data['nama'];?></td>
       <td><?php echo $data['jenis-kelamin'];?></td>
       <td><?php echo $data['alamat'];?></td>
@@ -188,4 +184,17 @@ elseif ($_GET['pesan']=='ekstensi') {
 
 // SELECT `profil`.* ,penempatan.id,kelompok.Kelompok FROM profil JOIN penempatan on penempatan.id_profil=profil.ID JOIN kelompok on kelompok.ID=penempatan.id_kelompok;
 
+//SELECT `profil`.*,kelompok.Kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID join kelompok on kelompok.ID=penempatan.id_kelompok;
+
 ?>
+
+
+<!--  <div class="row text-end">
+    <div class="col"><a href="logout.php" class="btn btn-warning text-end"><<-- Log out</a></div>
+    <div class="col">
+      <form action="" method="get">
+       
+      <input class="" type="text" name="cari" placeholder="Cari kata...">
+      <button name="car">Search</button>
+    </form></div>
+  </div> -->

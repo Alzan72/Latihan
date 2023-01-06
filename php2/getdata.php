@@ -52,6 +52,22 @@ $data=$hasil->fetch_assoc();
   <option value="desainer" <?php if ($data['jurusan']=="desainer") echo 'selected' ?>>Desainer</option>
 </select>
 <br>
+<select name="kelompok" class="form-select">
+  <option >Kelompok</option>
+  <?php 
+  $query="SELECT * FROM kelompok";
+  $value=$conn->query($query);
+
+  while($kelompok=$value->fetch_assoc()){
+  ?>
+  <option value="<?php echo $kelompok['ID']?>" <?php //if ($data['jurusan']=="tkj") echo 'selected' ?>><?php echo $kelompok['Kelompok']?></option>  
+  
+
+<?php
+}
+?>
+</select>
+<br>
 
 <!-- foto -->
 <div class="mb-3">

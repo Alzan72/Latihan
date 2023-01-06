@@ -15,7 +15,7 @@ if (isset($hapus)) {
         $file=@$data['foto'];
         unlink('img/'.$file);
         
-        $sql="DELETE FROM profil JOIN penempatan on penempatan.id_profil=profil.ID JOIN kelompok on kelompok.ID=penempatan.id WHERE `ID` = $hapus[$i]";
+        $sql="DELETE FROM profil JOIN penempatan on penempatan.id_profil=profil.ID JOIN kelompok on kelompok.ID=penempatan.id  WHERE `id` = $hapus[$i]";
 
         $conn->query($sql);
     }
