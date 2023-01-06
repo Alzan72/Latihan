@@ -26,7 +26,7 @@ if (empty($namafile)) {
         JOIN kelompok k
         ON k.ID = pe.id_kelompok 
         SET p.nama = '$nama',  pe.id_kelompok = '$kelompok', p.alamat = '$alamat', p.foto = '$filelama'
-        WHERE p.ID = $id;";
+        WHERE pe.id_profil = $id;";
 
     $conn->query($sql);
     header("location:tampil.php?pesan=ubah");

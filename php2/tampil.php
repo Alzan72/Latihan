@@ -162,7 +162,7 @@ elseif ($_GET['pesan']=='ekstensi') {
             const button = event.relatedTarget
             const id = button.getAttribute('data-bs-id');
             // const ubah = button.getAttribute('data-bs-aksi');
-            $.post('getdata.php', {id}, function () {
+            $.post('getdata-copy.php', {id}, function () {
 
             }).done(function (x) {
                 // alert:("done")
