@@ -18,6 +18,9 @@
 
 <?php
 session_start();
+$menu='Daftar';
+include 'navbar.php';
+
 if ($_SESSION['status']!="sukses") {
   header("location:login.php?pesan=belum");
 }
