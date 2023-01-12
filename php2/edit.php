@@ -8,7 +8,7 @@ $alamat=@$_POST['alamat'];
 $jk=@$_POST['jk'];
 $kelompok=@$_POST['kelompok'];
 $jurusan=@$_POST['jurusan'];
-$filelama=$_POST['filelama'];
+$filelama=@$_POST['filelama'];
 
 // file
 $namafile=@$_FILES['file']['name'];
@@ -19,17 +19,38 @@ $ekstensi=['png','jpg','jpeg'];
 $random=rand();
 $namafilesimpan=$random.'-'.$namafile;
 
+$sqljoin="SELECT * FROM penempatan WHERE id_profil=$id";
+$hasiljoin=$conn->query($sqljoin);
+$hasiljoin2=$hasiljoin->fetch_assoc();
+// var_dump($hasiljoin);die;
+
+
+
 if (empty($namafile)) {
-        $sql="UPDATE profil p
-        JOIN penempatan pe
-        ON p.ID = pe.id_profil
-        JOIN kelompok k
-        ON k.ID = pe.id_kelompok 
-        SET p.nama = '$nama',  pe.id_kelompok = '$kelompok', p.alamat = '$alamat', p.foto = '$filelama'
-        WHERE pe.id_profil = $id;";
+    if (empty($hasiljoin2['id_kelompok'])) {
+    $sql="INSERT INTO penempatan (id,id_profil,id_kelompok) values (NULL, $id,$kelompok)   ";
+   $conn->query($sql);
+   $sql2="UPDATE profil p
+   INNER JOIN penempatan pe ON p.ID = pe.id_profil
+   INNER JOIN kelompok k ON pe.id_kelompok = k.ID
+   SET p.nama = '$nama', pe.id_kelompok = '$kelompok', p.jurusan=   '$jurusan' , p.alamat = '$alamat', p.foto = '$filelama'
+   WHERE pe.id_profil = $id OR p.ID = $id;";
+
+   $conn->query($sql2);
+
+   header("location:tampil.php?pesan=ubah");
+
+    }else{
+        $sql=" UPDATE profil p
+        INNER JOIN penempatan pe ON p.ID = pe.id_profil
+        INNER JOIN kelompok k ON pe.id_kelompok = k.ID
+        SET p.nama = '$nama', pe.id_kelompok = '$kelompok', p.jurusan='$jurusan' , p.alamat = '$alamat', p.foto = '$filelama'
+        WHERE pe.id_profil = $id OR p.ID = $id;        
+        ";
 
     $conn->query($sql);
     header("location:tampil.php?pesan=ubah");
+}
 }
 else {
     if (!in_array($tipefile,$ekstensi)) {
@@ -42,10 +63,34 @@ else {
             $direktori='img/';
             unlink($direktori.$filelama);
             move_uploaded_file($temp, $direktori.$namafilesimpan);
+
+            if (empty($hasiljoin2['id_kelompok'])) {
+                $sql="INSERT INTO penempatan (id,id_profil,id_kelompok) values (NULL, $id,$kelompok)   ";
+               $conn->query($sql);
+               $sql2="UPDATE profil p
+               INNER JOIN penempatan pe ON p.ID = pe.id_profil
+               INNER JOIN kelompok k ON pe.id_kelompok = k.ID
+               SET p.nama = '$nama', pe.id_kelompok = '$kelompok',p.jurusan=$jurusan , p.alamat = '$alamat', p.foto = '$namafilesimpan'
+               WHERE pe.id_profil = $id AND p.ID = $id;";
             
-            $sql="UPDATE `profil` SET `nama` = '$nama', `jenis-kelamin` = '$jk', `alamat` = '$alamat', `foto` = '$namafilesimpan' WHERE `ID` = $id;";
-            $conn->query($sql);
-            header("location:tampil.php?pesan=ubah");
+               $conn->query($sql2);
+            
+               header("location:tampil.php?pesan=ubah");
+            
+                }
+                else{
+                    $sql=" UPDATE profil p
+                    INNER JOIN penempatan pe ON p.ID = pe.id_profil
+                    INNER JOIN kelompok k ON pe.id_kelompok = k.ID
+                    SET p.nama = '$nama', pe.id_kelompok = '$kelompok',p.jurusan=$jurusan , p.alamat = '$alamat', p.foto = '$namafilesimpan'
+                    WHERE pe.id_profil = $id OR p.ID = $id;        
+                    ";
+            
+                $conn->query($sql);
+                header("location:tampil.php?pesan=ubah");
+
+                }
+            
         }
     }    
 }

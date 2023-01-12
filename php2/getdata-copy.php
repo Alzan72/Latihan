@@ -3,7 +3,7 @@
 include 'koneksi.php';
 
 $id=@$_POST['id'];
-$sql="SELECT `profil`.*,kelompok.Kelompok, penempatan.id_kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID join kelompok on kelompok.ID=penempatan.id_kelompok WHERE profil.ID= $id";
+$sql="SELECT `profil`.*,kelompok.Kelompok, penempatan.id_kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID LEFT join kelompok on kelompok.ID=penempatan.id_kelompok WHERE profil.ID= $id ";
 $hasil=$conn->query($sql);
 
 $data=$hasil->fetch_assoc();
