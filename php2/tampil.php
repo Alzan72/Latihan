@@ -18,7 +18,7 @@
     
 <div class="container">
   <?php
-  $menu='tampil';
+  $menu='Data';
   include 'navbar.php';
   ?>
  
@@ -38,6 +38,7 @@
       <th scope="col">Aksi</th>
     </tr>
   </thead>
+  <form action="hapus.php" method="post">
   <?php
 
   session_start();
@@ -82,9 +83,9 @@ elseif ($_GET['pesan']=='ekstensi') {
   $cari=@$_GET['cari'];
   $car=@$_GET['car'];
   if (isset($cari)) {
-    $sql="SELECT `profil`.* ,penempatan.id,kelompok.Kelompok FROM profil LEFT JOIN penempatan on penempatan.id_profil=profil.ID LEFT JOIN kelompok on kelompok.ID=penempatan.id WHERE Nama LIKE'%$cari%' OR Alamat LIKE'%$cari%' OR Kelompok LIKE'%$cari%' OR Jurusan LIKE'%$cari%'  ";
+    $sql="SELECT `profil`.*,kelompok.Kelompok, penempatan.id FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID LEFT join kelompok on kelompok.ID=penempatan.id_kelompok WHERE Nama LIKE'%$cari%' OR Alamat LIKE'%$cari%' OR Kelompok LIKE'%$cari%' OR Jurusan LIKE'%$cari%'  ";
   } else {
-    $sql=" SELECT `profil`.*,kelompok.Kelompok FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID join kelompok on kelompok.ID=penempatan.id_kelompok";
+    $sql=" SELECT `profil`.*,kelompok.Kelompok, penempatan.id FROM profil Left JOIN penempatan on penempatan.id_profil=profil.ID LEFT join kelompok on kelompok.ID=penempatan.id_kelompok;";
   }
 
   
@@ -99,7 +100,7 @@ elseif ($_GET['pesan']=='ekstensi') {
   <tbody>
     <tr>
       <th scope="row"><?php echo $no ?></th>
-      <td><input type="checkbox" name="hapus[]" value="<?php //echo $data['id'] ?>"></td>
+      <td><input type="checkbox" name="id[]"value="<?php echo $data['id'] ?>, <?php echo $data['ID'] ?>">
       <td><?php echo $data['nama'];?></td>
       <td><?php echo $data['jenis-kelamin'];?></td>
       <td><?php echo $data['alamat'];?></td>
