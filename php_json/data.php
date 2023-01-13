@@ -84,7 +84,7 @@ $(".delete").click(function() {
 
 // for (let i = 0; i < hapus.length; i++) {
 //  hapus[i].addEventListener("click", getData) ;
-}
+// }
   // display the data from the database
   
 
