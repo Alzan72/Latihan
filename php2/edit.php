@@ -1,7 +1,6 @@
 <?php
 
 include 'koneksi.php';
-include 'function.php';
 
 $id=@$_POST['id'];
 $nama=@$_POST['nama'];
@@ -24,7 +23,6 @@ $sqljoin="SELECT * FROM penempatan WHERE id_profil=$id";
 $hasiljoin=$conn->query($sqljoin);
 $hasiljoin2=$hasiljoin->fetch_assoc();
 // var_dump($hasiljoin);die;
-
 
 if (empty($namafile)) {
     if (empty($hasiljoin2['id_kelompok']) && $kelompok > 0) {
@@ -64,5 +62,3 @@ else {
         }
     }    
 }
-
-?>
