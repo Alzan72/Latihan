@@ -1,12 +1,14 @@
 <?php
 
 include 'koneksi.php';
+include 'function.php';
 
 $id=@$_POST['id'];
 $nama=@$_POST['nama'];
 $alamat=@$_POST['alamat'];
 $jk=@$_POST['jk'];
 $kelompok=@$_POST['kelompok'];
+// var_dump($kelompok);die;
 $jurusan=@$_POST['jurusan'];
 $filelama=@$_POST['filelama'];
 
@@ -25,14 +27,14 @@ $hasiljoin2=$hasiljoin->fetch_assoc();
 // var_dump($hasiljoin);die;
 
 if (empty($namafile)) {
-    if (empty($hasiljoin2['id_kelompok']) && $kelompok > 0) {
+    if (empty($hasiljoin2['id_kelompok']) && $kelompok !='Kelompok') {
             insertKelompok();
             updateDataJoin();
 
     }elseif (isset($hasiljoin2)){
        updateDataJoin();
 } else{
-   updateDataProfil();
+   updateDataProfil($filelama);
 }
 
 }
@@ -48,7 +50,7 @@ else {
             unlink($direktori.$filelama);
             move_uploaded_file($temp, $direktori.$namafilesimpan);
 
-            if (empty($hasiljoin2['id_kelompok']) && $kelompok > 1) {
+            if (empty($hasiljoin2['id_kelompok']) && $kelompok !='Kelompok') {
                 insertKelompok();
                 updateDataJoin();
                 }
@@ -56,7 +58,7 @@ else {
                    updateDataJoin();
                 }
                 else{
-                   updateDataProfil();
+                   updateDataProfil($namafilesimpan);
                 }
             
         }

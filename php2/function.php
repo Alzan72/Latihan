@@ -5,7 +5,7 @@ include 'koneksi.php';
 function totalData($kolom){
     GLOBAL $conn;
     GLOBAl $hasil;
-    $sql=" SELECT `$kolom` , COUNT(`$kolom`)as jumlah FROM profil GROUP BY `$kolom` ";
+    $sql=" SELECT `$kolom` , COUNT(`$kolom`)as jumlah FROM profil GROUP BY `$kolom` ORDER BY jumlah DESC";
     $hasil=$conn->query($sql);
 };
 
@@ -13,7 +13,6 @@ function totalData($kolom){
 
 function insertKelompok(){
     GLOBAL $id,$kelompok,$conn;
-
     $sql="INSERT INTO penempatan (`id`,`id_profil`,`id_kelompok`) values (NULL, '$id','$kelompok')   ";
     $conn->query($sql);
 }
@@ -30,10 +29,10 @@ function updateDataJoin () {
     header("location:tampil.php?pesan=ubah");
 }
 
-function updateDataProfil(){
-    GLOBAL $id,$conn,$nama,$jurusan,$alamat,$filelama;
+function updateDataProfil($file){
+    GLOBAL $id,$conn,$nama,$jurusan,$alamat,$filelama,$jk;
 
-    $sql="UPDATE profil SET nama='$nama', jurusan='$jurusan', alamat='$alamat', foto='$filelama' WHERE ID=$id";
+    $sql="UPDATE profil SET nama='$nama', jurusan='$jurusan', alamat='$alamat',`jenis-kelamin`='$jk', foto='$file' WHERE ID=$id";
     $conn->query($sql);
     header("location:tampil.php?pesan=ubah");
 }

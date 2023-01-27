@@ -76,12 +76,15 @@
                 <option value="${isi.id}" data-kecamatan="${isi.name}">${isi.name}</option>
                 `)
               })
-              $('#kecamatan').change(function () {
+              $('#kecamatan').change(function (ev) {
+                ev.preventDefault();
                 const id_kec=$(this).val();
                 const op_kec=$(this).find(`option[value="${id_kec}"]`);
                 const kec=op_kec.attr('data-kecamatan');
                 console.log(kec);
-                $.post("prov.php", {provinsi:provinsi,kota:kota,kecamatan:kec}, function(response) {
+                $.post("prov.php", {provinsi:provinsi,kota:kota,kecamatan:kec}, 
+                                        //key: value
+                function(response) {
           $('#prov').html(response);
         });
                 
@@ -102,8 +105,5 @@
   });
 });
 </script>
-
-
-    </script>
 </body>
 </html>
